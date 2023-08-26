@@ -1,5 +1,8 @@
+import Header from '@/components/Header/Header'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import TokenAuthication from '@/context/auth'
+import Middleware from '@/middleware/middleware'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,7 +14,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <head>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+      </head>
+      <body className={inter.className}>
+        <TokenAuthication>
+            <Middleware>
+              {/* <Header/> */}
+               {children}
+            </Middleware>
+         </TokenAuthication>
+      </body>
     </html>
   )
 }
